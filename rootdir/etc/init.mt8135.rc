@@ -1,0 +1,282 @@
+import init.connectivity.rc
+import init.mt8135.usb.rc
+import init.sensors.rc
+
+on init
+    # Storage
+    mkdir /mnt/media_rw/usbotg 0700 media_rw media_rw
+    mkdir /storage/usbotg 0700 root root
+
+    mkdir /mnt/shell/emulated 0700 shell shell
+    mkdir /storage/emulated 0555 root root
+
+    export EXTERNAL_STORAGE /storage/emulated/legacy
+    export EMULATED_STORAGE_SOURCE /mnt/shell/emulated
+    export EMULATED_STORAGE_TARGET /storage/emulated
+    export SECONDARY_STORAGE_USB /storage/usbotg
+
+    symlink /storage/emulated/legacy /sdcard
+    symlink /storage/emulated/legacy /mnt/sdcard
+    symlink /storage/emulated/legacy /storage/sdcard0
+    symlink /mnt/shell/emulated/0 /storage/emulated/legacy
+    symlink /mnt/shell/emulated/0 /storage/emulated/0    
+
+    # Core
+    write /proc/sys/kernel/core_pattern /dev/null
+    write /proc/sys/kernel/poweroff_cmd "/system/bin/reboot -p"
+    write /sys/power/pm_async 0
+
+    # Graphics
+    chmod 0660 /dev/graphics/fb0
+    chown system graphics /dev/graphics/fb0
+
+    chmod 0660 /dev/mtkfb_vsync
+    chown system graphics /dev/mtkfb_vsync
+
+    chmod 0660 /dev/sw_sync
+    chown system graphics /dev/sw_sync
+
+    chmod 0666 /dev/ion
+
+    chmod 0440 /dev/mtk_disp
+    chown system system /dev/mtk_disp
+
+    chmod 0440 /dev/mtk_ovl
+    chown system system /dev/mtk_ovl
+
+    # BWC
+    chmod 0664 /sys/bus/platform/drivers/mem_bw_ctrl/concurrency_scenario
+    chown system media /sys/bus/platform/drivers/mem_bw_ctrl/concurrency_scenario
+
+    # SMI
+    chmod 0660 /dev/MTK_SMI
+    chown media graphics /dev/MTK_SMI
+
+    # Sched
+    chmod 0660 /dev/mtk_sched
+    chown system media /dev/mtk_sched
+
+    # Camera
+    chmod 0660 /dev/camera-sysram
+    chmod 0660 /dev/camera-isp
+    chmod 0660 /dev/camera-pipemgr
+    chmod 0660 /dev/kd_camera_hw
+    chmod 0660 /dev/kd_camera_flashlight
+    chmod 0660 /dev/kd_camera_hw_bus2
+    chmod 0660 /dev/FM50AF
+    chmod 0660 /dev/CAM_CAL_DRV
+
+    chown system camera /dev/camera-sysram
+    chown system camera /dev/camera-isp
+    chown system camera /dev/camera-pipemgr
+    chown system camera /dev/kd_camera_hw
+    chown system camera /dev/kd_camera_flashlight
+    chown system camera /dev/kd_camera_hw_bus2
+    chown system camera /dev/FM50AF
+    chown system camera /dev/CAM_CAL_DRV
+
+    chmod 0440 /dev/mtk_almk
+
+    # DebugFS
+    mount debugfs none /sys/kernel/debug
+
+    # LEDs
+    chown media media /sys/devices/platform/mtkfb.0/backlight_mode
+
+    # Persist
+    mkdir /persistbackup 0750 system system
+
+    # CPU boost
+    chown system system /sys/devices/platform/dynamic_boost/dynamic_boost
+    chmod 0750 /sys/devices/platform/dynamic_boost/dynamic_boost
+
+on boot
+    class_start late_start
+
+    start drvbd
+
+    # DRM
+    exec /system/bin/sh /system/etc/kisd_starter.sh
+    start kisd
+
+    # NVRAM
+    start NvRAMAgent
+
+on property:sys.boot_completed=1
+    write /sys/kernel/mm/ksm/pages_to_scan 100
+    write /sys/kernel/mm/ksm/sleep_millisecs 700
+    write /sys/kernel/mm/ksm/run 1
+
+    # Thermal  
+    chown root system /proc/mtktscpu/mtktscpu
+    chmod 0660 /proc/mtktscpu/mtktscpu
+    chown root system /proc/mtktsbattery/mtktsbattery
+    chmod 0660 /proc/mtktsbattery/mtktsbattery
+    chown root system /proc/mtktspa/mtktspa
+    chmod 0660 /proc/mtktspa/mtktspa
+    chown root system /proc/mtktspmic/mtktspmic
+    chmod 0660 /proc/mtktspmic/mtktspmic
+    chown root system /proc/driver/mtk_thermal_monitor
+    chmod 0660 /proc/driver/mtk_thermal_monitor
+    chown root radio /proc/driver/mtm_scen_call
+    chmod 0660 /proc/driver/mtm_scen_call
+    chown system system /proc/driver/mtk_cl_sd_pid
+    chmod 0660 /proc/driver/mtk_cl_sd_pid
+    chown root system /proc/wmt_tm/wmt_tm
+    chown system system /proc/wmt_tm/tm_pid
+    chown system system /proc/wmt_tm/tx_thro
+    chown system system /proc/wmt_tm/wmt_val
+    chown system system /proc/wmt_tm/wfd_stat
+
+    start thermal_manager
+    start thermald
+
+    chown system system /sys/devices/platform/tmp103-thermal/config
+    chown system system /sys/devices/platform/tmp103-thermal/temp
+    chown system system /sys/devices/platform/tmp103-thermal/thermal_zone
+    chown system system /sys/devices/platform/tmp103-cooling/cooler
+
+on fs
+    # Mount everything
+    mount_all /fstab.mt8135
+
+    # Persist
+    wait /dev/block/platform/mtk-msdc.0/by-name/persisbackup
+    mount ext4 /dev/block/platform/mtk-msdc.0/by-name/persisbackup /persistbackup nodelalloc,discard,errors=panic
+    restorecon_recursive /persistbackup
+
+service pvrsrvctl /system/vendor/bin/pvrsrvctl --no-module --start 
+    class core
+    user root
+    group root
+    oneshot
+
+service pvrdebug /system/vendor/bin/pvrdebug -log trace -loggroups main,pm,rtd,spm,hwr,pow
+    class main
+    user root
+    group root
+    oneshot
+
+on post-fs
+    # Read one page at a time for swap (default is 8)
+    write /proc/sys/vm/page-cluster 0
+
+    # Avoid evicting pages and use zram disk
+    write /proc/sys/vm/swappiness 100
+
+    # Turn on swap
+    swapon_all /fstab.mt8135
+
+on post-fs-data
+    mkdir /data/nvram 2771 root system
+    mkdir /data/media 0770 media_rw media_rw
+
+    chmod 0770 /persistbackup
+    chown root system /persistbackup
+
+    # Video
+    insmod /system/lib/modules/vcodec_kernel_driver.ko
+
+    # HDMI
+    chmod 0660 /dev/hdmitx
+    chown media graphics /dev/hdmitx
+
+    # Sensors
+    chmod 0660 /dev/hwmsensor
+    chmod 0660 /dev/msensor
+    chmod 0660 /dev/gsensor
+    chmod 0660 /dev/als_ps
+
+    chown system system /dev/hwmsensor
+    chown system system /dev/msensor
+    chown system system /dev/gsensor
+    chown system system /dev/als_ps
+
+    mkdir /data/misc/sensors 0664 system system
+    mkdir /data/misc/akmd 0664 system system
+
+    # Start hotplug service
+    start hotplug
+    start sensorcal
+
+    # Filesystem encryption flow
+    setprop vold.post_fs_data_done 1
+
+    # Radio
+    chmod 0660 /dev/ttyGS0
+    chown system system /dev/ttyGS0
+    chmod 0660 /dev/ttyGS1
+    chown system system /dev/ttyGS1
+
+    # Bluetooth
+    chmod 0660 /dev/ttyGS2
+    chown bluetooth radio /dev/ttyGS2
+
+service force_prov /system/bin/force_provisioning.sh
+    class main
+    user root
+    disabled
+    oneshot
+
+service kisd /system/bin/kisd
+    class main
+    user root
+    group system media drmrpc
+    disabled
+
+service nvram_daemon /system/bin/nvram_daemon
+    class main
+    user root
+    group system
+    oneshot
+
+service NvRAMAgent /system/bin/nvram_agent_binder
+    user system
+    group system
+
+service drvbd /system/bin/drvbd
+    class main
+    user system
+    group system
+
+service sdcard /system/bin/sdcard -u 1023 -g 1023 -l /data/media /mnt/shell/emulated
+    class late_start
+
+service fuse_usbotg /system/bin/sdcard -u 1023 -g 1023 -d /mnt/media_rw/usbotg /storage/usbotg
+    class late_start
+    disabled
+
+service hotplug /system/bin/hotplug
+    class main
+    disabled
+    user root
+    group root
+
+on property:ro.product.model=KFARWI
+   start artvs
+
+on property:ro.product.model=KFASWI
+   start astvs
+
+service thermal_manager /system/bin/thermal_manager
+    disabled
+    user root
+    group root
+    oneshot
+
+service sensorcal /system/bin/sensorcal.sh
+    class main
+    user root
+    group root
+    disabled
+    oneshot
+
+on property:vold.decrypt=trigger_restart_min_framework
+    start kisd
+
+on property:vold.decrypt=trigger_restart_framework
+    start nvram_daemon
+    start kisd
+
+on property:runtime.kisdIsReady=1
+    start force_prov

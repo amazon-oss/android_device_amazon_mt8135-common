@@ -43,6 +43,9 @@ BOARD_USES_MTK_HARDWARE := true
 TARGET_BOARD_PLATFORM := mt8135
 TARGET_BOARD_VENDOR := amazon
 
+# Properties
+TARGET_SYSTEM_PROP += $(COMMON_PATH)/system.prop
+
 # Recovery
 TARGET_RECOVERY_FSTAB ?= $(COMMON_PATH)/rootdir/etc/fstab.mt8135
 
