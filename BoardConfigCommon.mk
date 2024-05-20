@@ -17,6 +17,11 @@ TARGET_ARCH_VARIANT_CPU := cortex-a15
 # Bootloader
 TARGET_HAS_LOCKED_BOOTLOADER := false
 
+# Platform
+BOARD_USES_MTK_HARDWARE := true
+TARGET_BOARD_PLATFORM := mt8135
+TARGET_BOARD_VENDOR := amazon
+
 ifeq ($(TARGET_HAS_LOCKED_BOOTLOADER),true)
 # Inherit the prebuilt firmware files
 include device/amazon/mt8135-firmware/BoardConfigFirmware.mk
