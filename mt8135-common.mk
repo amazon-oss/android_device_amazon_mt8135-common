@@ -4,9 +4,31 @@
 # SPDX-License-Identifier: Apache-2.0
 #
 
+# Audio
+PRODUCT_PACKAGES += \
+    audio.a2dp.default \
+    audio.r_submix.default \
+    audio.usb.default
+
+PRODUCT_PACKAGES += \
+    libaudio-resampler \
+    libaudioutils \
+    libtinyalsa
+
+PRODUCT_COPY_FILES += \
+    $(call find-copy-subdir-files,*,$(LOCAL_PATH)/configs/audio/,$(TARGET_COPY_OUT_VENDOR)/etc)
+
 # Display
 PRODUCT_PACKAGES += \
     libion
+
+# Dolby
+DOLBY_DAX_VERSION := 2
+DOLBY_DAP := true
+DOLBY_DDP := true
+DOLBY_UDC := true
+
+$(call inherit-product, vendor/dolby/dolby-product.mk)
 
 # Overlays
 DEVICE_PACKAGE_OVERLAYS += $(LOCAL_PATH)/overlay
