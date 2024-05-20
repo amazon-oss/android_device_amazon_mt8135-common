@@ -31,3 +31,15 @@ bin/kisd
 etc/kisd_starter.sh
 lib/hw/keystore.amzn.mt8135.so
 lib/hw/keystore.mt8135.so
+
+# NVRAM
+bin/nvram_daemon
+bin/nvram_agent_binder
+lib/libcustom_nvram.so
+lib/libfile_op.so
+lib/libhwm.so
+lib/libnvram.so
+lib/libnvram_sec.so
+lib/libnvram_platform.so
+lib/libnvramagentclient.so
+lib/libnvram_daemon_callback.so
