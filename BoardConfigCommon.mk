@@ -43,6 +43,9 @@ BOARD_USES_MTK_HARDWARE := true
 TARGET_BOARD_PLATFORM := mt8135
 TARGET_BOARD_VENDOR := amazon
 
+# Recovery
+TARGET_RECOVERY_FSTAB := $(COMMON_PATH)/rootdir/etc/fstab.mt8135
+
 ifeq ($(TARGET_HAS_LOCKED_BOOTLOADER),true)
 # Inherit the prebuilt firmware files
 include device/amazon/mt8135-firmware/BoardConfigFirmware.mk
