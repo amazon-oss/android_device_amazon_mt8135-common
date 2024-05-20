@@ -26,6 +26,10 @@ vendor/lib/libsrv_init.so
 vendor/lib/libsrv_um.so
 vendor/lib/libusc.so
 
+# IDME
+bin/idme
+bin/devicetype_service
+
 # Keymaster
 bin/kisd
 etc/kisd_starter.sh
