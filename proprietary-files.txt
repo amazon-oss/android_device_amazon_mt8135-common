@@ -25,3 +25,9 @@ vendor/lib/libPVRScopeServices.so
 vendor/lib/libsrv_init.so
 vendor/lib/libsrv_um.so
 vendor/lib/libusc.so
+
+# Keymaster
+bin/kisd
+etc/kisd_starter.sh
+lib/hw/keystore.amzn.mt8135.so
+lib/hw/keystore.mt8135.so
