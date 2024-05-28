@@ -55,6 +55,20 @@ ADDITIONAL_DEFAULT_PROPERTIES += \
     ro.secure=0
 endif
 
+# Wi-Fi
+PRODUCT_PACKAGES += \
+    lib_driver_cmd_mt66xx \
+    libwifi-hal-mt66xx \
+    libwpa_client
+
+PRODUCT_PACKAGES += \
+    hostapd \
+    hostapd_cli \
+    wpa_cli
+
+PRODUCT_COPY_FILES += \
+    $(call find-copy-subdir-files,*,$(LOCAL_PATH)/configs/wifi,$(TARGET_COPY_OUT_SYSTEM)/etc/wifi)
+
 # Call dalvik heap config
 $(call inherit-product, frameworks/native/build/tablet-7in-hdpi-1024-dalvik-heap.mk)
 
