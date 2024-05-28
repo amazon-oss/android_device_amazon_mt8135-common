@@ -85,6 +85,15 @@ lib/libnvram_platform.so
 lib/libnvramagentclient.so
 lib/libnvram_daemon_callback.so
 
+# Thermal
+bin/thermal_manager
+etc/.tp/thermal.conf
+etc/.tp/thermal.encrypt.conf
+etc/.tp/thermal.off.conf
+etc/.tp/thermal.policy.conf
+lib/hw/thermal.mt8135.so
+lib/libthermalservice.so
+
 # Wi-Fi
 bin/6620_launcher
 bin/6620_wmt_concurrency
