@@ -64,3 +64,11 @@ lib/libnvram_sec.so
 lib/libnvram_platform.so
 lib/libnvramagentclient.so
 lib/libnvram_daemon_callback.so
+
+# Wi-Fi
+bin/6620_launcher
+bin/6620_wmt_concurrency
+bin/6620_wmt_lpbk
+bin/wlan_loader
+bin/wmt_loader
+bin/wpa_supplicant
