@@ -73,6 +73,18 @@ etc/kisd_starter.sh
 lib/hw/keystore.amzn.mt8135.so
 lib/hw/keystore.mt8135.so
 
+# Media (OMX)
+lib/libMtkOmxVdec.so
+lib/libMtkOmxMp3Dec.so
+lib/libMtkOmxAIVPlayer.so
+lib/libMtkOmxCore.so
+lib/libMtkOmxVenc.so
+lib/libsched.so
+lib/libstagefrighthw.so
+lib/libvcodec_utility.so
+lib/libvcodecdrv.so
+lib/lib_uree_mtk_video_secure_al.so
+
 # NVRAM
 bin/nvram_daemon
 bin/nvram_agent_binder
