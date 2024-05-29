@@ -34,6 +34,10 @@ $(call inherit-product, vendor/dolby/dolby-product.mk)
 # GPS
 $(call inherit-product, device/common/gps/gps_us_supl.mk)
 
+# Lights
+PRODUCT_PACKAGES += \
+    lights.mt8135
+
 # Media (OMX)
 PRODUCT_COPY_FILES += \
     $(call find-copy-subdir-files,*,$(LOCAL_PATH)/configs/media/,$(TARGET_COPY_OUT_SYSTEM)/etc)
