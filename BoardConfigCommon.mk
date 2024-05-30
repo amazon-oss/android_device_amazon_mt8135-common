@@ -14,6 +14,14 @@ TARGET_CPU_ABI2 := armeabi
 TARGET_CPU_VARIANT := cortex-a7
 TARGET_ARCH_VARIANT_CPU := cortex-a15
 
+# Bootloader
+TARGET_HAS_LOCKED_BOOTLOADER := false
+
+ifeq ($(TARGET_HAS_LOCKED_BOOTLOADER),true)
+# Inherit the prebuilt firmware files
+include device/amazon/mt8135-firmware/BoardConfigFirmware.mk
+endif
+
 # Inherit the prebuilt kernel files
 include device/amazon/mt8135-kernel/BoardConfigKernel.mk
 
