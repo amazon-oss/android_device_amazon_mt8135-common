@@ -63,6 +63,9 @@ vendor/lib/libwvm.so
 vendor/lib/libwvdrm_L1.so
 vendor/lib/libWVStreamControlAPI_L1.so
 
+# GPS
+lib/hw/gps.mt8135.so
+
 # IDME
 bin/idme
 bin/devicetype_service
