@@ -6,4 +6,4 @@
 /dev/block/platform/mtk-msdc.0/by-name/recovery       /recovery      emmc    defaults                                  defaults
 
 /devices/platform/mt_usb                              auto           auto    defaults                                  voldmanaged=usbotg:auto
-/dev/block/zram0                                      none           swap    defaults                                  zramsize=419430400,zramstreams=3
+/dev/block/zram0                                      none           swap    defaults                                  zramsize=805306368,zramstreams=3
