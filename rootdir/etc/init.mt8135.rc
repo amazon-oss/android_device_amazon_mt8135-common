@@ -1,6 +1,7 @@
 import init.connectivity.rc
 import init.mt8135.usb.rc
 import init.sensors.rc
+import init.power.rc
 
 on init
     # Storage
@@ -86,10 +87,6 @@ on init
     # Persist
     mkdir /persistbackup 0750 system system
 
-    # CPU boost
-    chown system system /sys/devices/platform/dynamic_boost/dynamic_boost
-    chmod 0750 /sys/devices/platform/dynamic_boost/dynamic_boost
-
 on boot
     class_start late_start
 
@@ -103,11 +100,6 @@ on boot
     start NvRAMAgent
 
 on property:sys.boot_completed=1
-    write /sys/kernel/mm/ksm/pages_to_scan 100
-    write /sys/kernel/mm/ksm/sleep_millisecs 700
-    write /sys/kernel/mm/ksm/run 1
-    setprop sys.io.scheduler bfq
-
     # Thermal  
     chown root system /proc/mtktscpu/mtktscpu
     chmod 0660 /proc/mtktscpu/mtktscpu
@@ -157,16 +149,6 @@ service pvrdebug /system/vendor/bin/pvrdebug -log trace -loggroups main,pm,rtd,s
     user root
     group root
     oneshot
-
-on post-fs
-    # Read one page at a time for swap (default is 8)
-    write /proc/sys/vm/page-cluster 0
-
-    # Avoid evicting pages and use zram disk
-    write /proc/sys/vm/swappiness 100
-
-    # Turn on swap
-    swapon_all /fstab.mt8135
 
 on post-fs-data
     mkdir /data/nvram 2771 root system

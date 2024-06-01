@@ -86,6 +86,7 @@ PRODUCT_PACKAGES += \
     init.connectivity.rc \
     init.mt8135.rc \
     init.mt8135.usb.rc \
+    init.power.rc \
     init.sensors.rc \
     ueventd.mt8135.rc
 
