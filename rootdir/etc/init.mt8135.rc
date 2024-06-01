@@ -106,6 +106,7 @@ on property:sys.boot_completed=1
     write /sys/kernel/mm/ksm/pages_to_scan 100
     write /sys/kernel/mm/ksm/sleep_millisecs 700
     write /sys/kernel/mm/ksm/run 1
+    setprop sys.io.scheduler bfq
 
     # Thermal  
     chown root system /proc/mtktscpu/mtktscpu
