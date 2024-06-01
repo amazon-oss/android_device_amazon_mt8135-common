@@ -1,0 +1,54 @@
+on init
+    # Dynamic CPU boost
+    chown system system /sys/devices/platform/dynamic_boost/dynamic_boost
+    chmod 0750 /sys/devices/platform/dynamic_boost/dynamic_boost
+
+on post-fs
+    # Read one page at a time for swap (default is 8)
+    write /proc/sys/vm/page-cluster 0
+
+    # Avoid evicting pages and use zram disk
+    write /proc/sys/vm/swappiness 100
+
+    # Turn on swap
+    swapon_all /fstab.mt8135
+
+on property:sys.boot_completed=1
+    write /sys/kernel/mm/ksm/pages_to_scan 200
+    write /sys/kernel/mm/ksm/sleep_millisecs 500
+    write /sys/kernel/mm/ksm/run 1
+    setprop sys.io.scheduler bfq
+
+# Powersave
+on property:sys.perf.profile=0
+    write /sys/devices/system/cpu/cpu1/online 1
+    write /sys/devices/system/cpu/cpu2/online 1
+    write /sys/devices/system/cpu/cpu3/online 1
+    write /sys/devices/system/cpu/cpu0/cpufreq/scaling_governor "powersave"
+    write /sys/devices/system/cpu/cpu1/cpufreq/scaling_governor "powersave"
+    write /sys/devices/system/cpu/cpu2/cpufreq/scaling_governor "powersave"
+    write /sys/devices/system/cpu/cpu3/cpufreq/scaling_governor "powersave"
+
+# Balanced
+on property:sys.perf.profile=1
+    write /sys/devices/system/cpu/cpu1/online 1
+    write /sys/devices/system/cpu/cpu2/online 1
+    write /sys/devices/system/cpu/cpu3/online 1
+    write /sys/devices/system/cpu/cpu0/cpufreq/scaling_governor "ondemand"
+    write /sys/devices/system/cpu/cpu1/cpufreq/scaling_governor "ondemand"
+    write /sys/devices/system/cpu/cpu2/cpufreq/scaling_governor "ondemand"
+    write /sys/devices/system/cpu/cpu3/cpufreq/scaling_governor "ondemand"
+    chown system system /sys/devices/system/cpu/cpu0/cpufreq/ondemand/io_is_busy
+    chmod 0750 /sys/devices/system/cpu/cpu0/cpufreq/ondemand/io_is_busy
+    chown system system /sys/devices/system/cpu/cpu2/cpufreq/ondemand/io_is_busy
+    chmod 0750 /sys/devices/system/cpu/cpu2/cpufreq/ondemand/io_is_busy
+
+# High performance
+on property:sys.perf.profile=2
+    write /sys/devices/system/cpu/cpu1/online 1
+    write /sys/devices/system/cpu/cpu2/online 1
+    write /sys/devices/system/cpu/cpu3/online 1
+    write /sys/devices/system/cpu/cpu0/cpufreq/scaling_governor "performance"
+    write /sys/devices/system/cpu/cpu1/cpufreq/scaling_governor "performance"
+    write /sys/devices/system/cpu/cpu2/cpufreq/scaling_governor "performance"
+    write /sys/devices/system/cpu/cpu3/cpufreq/scaling_governor "performance"
