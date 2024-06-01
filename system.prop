@@ -1,3 +1,6 @@
+# ART
+ro.sys.fw.dex2oat_thread_count=4
+
 # Audio
 dolby.audio.sink.info=speaker
 ro.audio.hw_vol_devices=0x0C
