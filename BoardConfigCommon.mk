@@ -46,6 +46,20 @@ TARGET_BOARD_VENDOR := amazon
 # Recovery
 TARGET_RECOVERY_FSTAB := $(COMMON_PATH)/rootdir/etc/fstab.mt8135
 
+# Recovery (TWRP)
+ifeq ($(RECOVERY_VARIANT),twrp)
+DEVICE_RESOLUTION := 800x1280
+TW_ALWAYS_RMRF := true
+TW_BRIGHTNESS_PATH := /sys/class/leds/lcd-backlight/brightness
+TW_EXTERNAL_STORAGE_MOUNT_POINT := "usb-otg"
+TW_EXTERNAL_STORAGE_PATH := "/usb-otg"
+TW_INTERNAL_STORAGE_MOUNT_POINT := "data"
+TW_INTERNAL_STORAGE_PATH := "/data/media"
+TW_MAX_BRIGHTNESS := 255
+TW_NO_USB_STORAGE := true
+TW_THEME := portrait_hdpi
+endif
+
 ifeq ($(TARGET_HAS_LOCKED_BOOTLOADER),true)
 # Inherit the prebuilt firmware files
 include device/amazon/mt8135-firmware/BoardConfigFirmware.mk
