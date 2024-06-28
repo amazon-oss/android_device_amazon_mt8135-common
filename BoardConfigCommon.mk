@@ -44,20 +44,25 @@ TARGET_BOARD_PLATFORM := mt8135
 TARGET_BOARD_VENDOR := amazon
 
 # Recovery
-TARGET_RECOVERY_FSTAB := $(COMMON_PATH)/rootdir/etc/fstab.mt8135
+TARGET_RECOVERY_FSTAB ?= $(COMMON_PATH)/rootdir/etc/fstab.mt8135
 
 # Recovery (TWRP)
 ifeq ($(RECOVERY_VARIANT),twrp)
 DEVICE_RESOLUTION := 800x1280
+TARGET_RECOVERY_DEVICE_DIRS += $(COMMON_PATH)
+TARGET_RECOVERY_FSTAB := $(COMMON_PATH)/recovery/root/etc/recovery.fstab
+TW_SCREEN_BLANK_ON_BOOT := true
 TW_ALWAYS_RMRF := true
 TW_BRIGHTNESS_PATH := /sys/class/leds/lcd-backlight/brightness
+TW_EXCLUDE_SUPERSU := true
 TW_EXTERNAL_STORAGE_MOUNT_POINT := "usb-otg"
 TW_EXTERNAL_STORAGE_PATH := "/usb-otg"
+TW_HACKED_BL_BUTTON := true
 TW_INTERNAL_STORAGE_MOUNT_POINT := "data"
 TW_INTERNAL_STORAGE_PATH := "/data/media"
 TW_MAX_BRIGHTNESS := 255
 TW_NO_USB_STORAGE := true
-TW_THEME := portrait_hdpi
+TW_THEME ?= portrait_hdpi
 endif
 
 ifeq ($(TARGET_HAS_LOCKED_BOOTLOADER),true)
