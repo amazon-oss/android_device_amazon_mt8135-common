@@ -31,14 +31,6 @@ PRODUCT_CHARACTERISTICS := tablet,nosdcard
 PRODUCT_PACKAGES += \
     libion
 
-# Dolby
-DOLBY_DAX_VERSION := 2
-DOLBY_DAP := true
-DOLBY_DDP := true
-DOLBY_UDC := true
-
-$(call inherit-product, vendor/dolby/dolby-product.mk)
-
 # GPS
 $(call inherit-product, device/common/gps/gps_us_supl.mk)
 
