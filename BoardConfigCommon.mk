@@ -18,9 +18,6 @@ TARGET_ARCH_VARIANT_CPU := cortex-a15
 AUDIO_MIXER_REQUIRES_MANUAL_AMP := true
 TARGET_CPU_MEMCPY_OPT_DISABLE := true
 
-# Bootloader
-TARGET_HAS_LOCKED_BOOTLOADER := false
-
 # Display
 BOARD_EGL_CFG := $(COMMON_PATH)/configs/display/egl.cfg
 MAX_EGL_CACHE_KEY_SIZE := 12*1024
@@ -96,14 +93,6 @@ WIFI_DRIVER_FW_PATH_P2P := P2P
 WIFI_DRIVER_STATE_ON := 1
 WIFI_DRIVER_STATE_OFF := 0
 WPA_SUPPLICANT_VERSION := VER_0_8_X
-
-ifeq ($(TARGET_HAS_LOCKED_BOOTLOADER),true)
-# Inherit the prebuilt firmware files
-include device/amazon/mt8135-firmware/BoardConfigFirmware.mk
-endif
-
-# Inherit the prebuilt kernel files
-include device/amazon/mt8135-kernel/BoardConfigKernel.mk
 
 # Inherit the proprietary files
 include vendor/amazon/mt8135-common/BoardConfigVendor.mk
