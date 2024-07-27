@@ -102,6 +102,10 @@ ADDITIONAL_DEFAULT_PROPERTIES += \
     ro.secure=0
 endif
 
+# Shims
+PRODUCT_PACKAGES += \
+    libamazonlog
+
 # Wi-Fi
 PRODUCT_PACKAGES += \
     lib_driver_cmd_mt66xx \
