@@ -4,24 +4,6 @@ import init.sensors.rc
 import init.power.rc
 
 on init
-    # Storage
-    mkdir /mnt/media_rw/usbotg 0700 media_rw media_rw
-    mkdir /storage/usbotg 0700 root root
-
-    mkdir /mnt/shell/emulated 0700 shell shell
-    mkdir /storage/emulated 0555 root root
-
-    export EXTERNAL_STORAGE /storage/emulated/legacy
-    export EMULATED_STORAGE_SOURCE /mnt/shell/emulated
-    export EMULATED_STORAGE_TARGET /storage/emulated
-    export SECONDARY_STORAGE_USB /storage/usbotg
-
-    symlink /storage/emulated/legacy /sdcard
-    symlink /storage/emulated/legacy /mnt/sdcard
-    symlink /storage/emulated/legacy /storage/sdcard0
-    symlink /mnt/shell/emulated/0 /storage/emulated/legacy
-    symlink /mnt/shell/emulated/0 /storage/emulated/0    
-
     # Core
     write /proc/sys/kernel/core_pattern /dev/null
     write /proc/sys/kernel/poweroff_cmd "/system/bin/reboot -p"
