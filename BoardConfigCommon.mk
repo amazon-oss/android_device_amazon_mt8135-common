@@ -99,6 +99,9 @@ TW_NO_USB_STORAGE := true
 TW_THEME ?= portrait_hdpi
 endif
 
+# Text Relocations
+TARGET_NEEDS_PLATFORM_TEXT_RELOCATIONS := true
+
 # Wi-Fi
 BOARD_CONNECTIVITY_VENDOR := MediaTek
 BOARD_WLAN_DEVICE := MediaTek
