@@ -49,7 +49,6 @@ lib/libdrmmtkutil.so
 lib/libdrmplayreadydecryptor.so
 lib/libplayready.so
 lib/lib_uree_mtk_modular_drm.so
-lib/libstlport.so
 vendor/lib/drm/libdrmwvmplugin.so
 vendor/lib/mediadrm/libplayreadydrmplugin.so
 vendor/lib/mediadrm/libwvdrmengine.so

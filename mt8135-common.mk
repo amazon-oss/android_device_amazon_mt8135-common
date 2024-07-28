@@ -31,6 +31,10 @@ PRODUCT_CHARACTERISTICS := tablet,nosdcard
 PRODUCT_PACKAGES += \
     libion
 
+# DRM
+PRODUCT_PACKAGES += \
+    libstlport_shared
+
 # GPS
 $(call inherit-product, device/common/gps/gps_us_supl.mk)
 
@@ -90,7 +94,8 @@ endif
 
 # Shims
 PRODUCT_PACKAGES += \
-    libamazonlog
+    libamazonlog \
+    libstlport_shim
 
 # Wi-Fi
 PRODUCT_PACKAGES += \
