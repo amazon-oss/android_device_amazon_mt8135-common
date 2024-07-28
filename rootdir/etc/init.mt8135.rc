@@ -222,13 +222,6 @@ service drvbd /system/bin/drvbd
     user system
     group system
 
-service sdcard /system/bin/sdcard -u 1023 -g 1023 -l /data/media /mnt/shell/emulated
-    class late_start
-
-service fuse_usbotg /system/bin/sdcard -u 1023 -g 1023 -d /mnt/media_rw/usbotg /storage/usbotg
-    class late_start
-    disabled
-
 service hotplug /system/bin/hotplug
     class main
     disabled
