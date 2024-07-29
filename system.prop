@@ -4,6 +4,10 @@ ro.sys.fw.dex2oat_thread_count=4
 # Audio
 ro.audio.hw_vol_devices=0x0C
 
+# Camera
+media.stagefright.legacyencoder=true
+media.stagefright.less-secure=true
+
 # OpenGLES 3.1
 ro.opengles.version=196609
 
