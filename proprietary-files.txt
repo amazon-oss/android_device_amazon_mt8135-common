@@ -109,4 +109,6 @@ bin/6620_wmt_concurrency
 bin/6620_wmt_lpbk
 bin/wlan_loader
 bin/wmt_loader
-bin/wpa_supplicant
+
+# Wi-Fi (supplicant) - from karnak-user 6.0 NS6312 1852 amz-p,release-keys
+bin/wpa_supplicant|7d26ffb1e9232991b44cd23f03410402e4ebf120
