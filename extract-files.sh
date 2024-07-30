@@ -102,6 +102,7 @@ function blob_fixup() {
             ;;
         lib/libMtkOmxAIVPlayer.so)
             patchelf --add-needed "libamazonlog.so" "${2}"
+            patchelf --add-needed "libstagefright_shim.so" "${2}"
             ;;
         lib/libMtkOmxCore.so)
             patchelf --add-needed "libamazonlog.so" "${2}"
@@ -257,6 +258,7 @@ function blob_fixup() {
             ;;
         vendor/lib/libwvm.so)
             patchelf --add-needed "libamazonlog.so" "${2}"
+            patchelf --add-needed "libstagefright_shim.so" "${2}"
             ;;
         vendor/lib/libWVStreamControlAPI_L1.so)
             patchelf --add-needed "libstlport_shim.so" "${2}"

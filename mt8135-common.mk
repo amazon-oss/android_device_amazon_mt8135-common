@@ -101,6 +101,7 @@ PRODUCT_PACKAGES += \
     libstlport_shim
 
 PRODUCT_PACKAGES += \
+    libstagefright_shim \
     libui_shim
 
 # Wi-Fi
