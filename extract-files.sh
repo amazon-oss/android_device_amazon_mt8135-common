@@ -114,6 +114,7 @@ function blob_fixup() {
             ;;
         lib/libMtkOmxVenc.so)
             patchelf --add-needed "libamazonlog.so" "${2}"
+            sed -i 's|_ZN7android19GraphicBufferMapper4lockEPK13native_handleiRKNS_4RectEPPv|_ZN7android19GraphicBufferMapper4lockEPK13native_handlejRKNS_4RectEPPv|g' "${2}"
             ;;
         lib/lib_uree_mtk_modular_drm.so)
             patchelf --add-needed "libamazonlog.so" "${2}"
@@ -162,6 +163,7 @@ function blob_fixup() {
             ;;
         lib/libcam.client.so)
             patchelf --add-needed "libamazonlog.so" "${2}"
+            sed -i 's|_ZN7android19GraphicBufferMapper4lockEPK13native_handleiRKNS_4RectEPPv|_ZN7android19GraphicBufferMapper4lockEPK13native_handlejRKNS_4RectEPPv|g' "${2}"
             ;;
         lib/libcam.device1.so)
             patchelf --add-needed "libamazonlog.so" "${2}"
