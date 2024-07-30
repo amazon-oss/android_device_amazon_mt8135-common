@@ -100,6 +100,9 @@ PRODUCT_PACKAGES += \
     libamazonlog \
     libstlport_shim
 
+PRODUCT_PACKAGES += \
+    libui_shim
+
 # Wi-Fi
 PRODUCT_PACKAGES += \
     lib_driver_cmd_mt66xx \
