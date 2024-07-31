@@ -259,6 +259,7 @@ function blob_fixup() {
         vendor/lib/libwvm.so)
             patchelf --add-needed "libamazonlog.so" "${2}"
             patchelf --add-needed "libstagefright_shim.so" "${2}"
+            sed -i "s/\x0b\x68\x20\x46\x5a\x6b\x90\x47\x30\x46/\x0b\x68\x20\x46\x5a\x6b\x00\xbf\x30\x46/" "${2}"
             ;;
         vendor/lib/libWVStreamControlAPI_L1.so)
             patchelf --add-needed "libstlport_shim.so" "${2}"
