@@ -1,3 +1,4 @@
+import init.device.rc
 import init.connectivity.rc
 import init.mt8135.usb.rc
 import init.sensors.rc
