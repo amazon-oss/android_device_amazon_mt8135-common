@@ -83,16 +83,9 @@ lib/libvcodecdrv.so
 lib/lib_uree_mtk_video_secure_al.so
 
 # NVRAM
-bin/nvram_daemon
 bin/nvram_agent_binder
-lib/libcustom_nvram.so
-lib/libfile_op.so
 lib/libhwm.so
 lib/libnvram.so
-lib/libnvram_sec.so
-lib/libnvram_platform.so
-lib/libnvramagentclient.so
-lib/libnvram_daemon_callback.so
 
 # Thermal
 bin/thermal_manager
