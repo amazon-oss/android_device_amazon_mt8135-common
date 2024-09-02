@@ -1,15 +1,11 @@
 # Unpinned blobs from full_ariel-user 4.4.3 KTU84M 20.4.5.3_user_453011120 release-keys
 
 # Audio
-lib/hw/audio.primary.mt8135.so
-lib/libaudiocustparam.so
 lib/libaudiosetting.so
-lib/libaudiocompensationfilter.so
 lib/libaudio_customization.so
 lib/libbessound_mtk.so
 lib/libblisrc.so
 lib/libmtk_drvb.so
-lib/libsmartvolume.so
 lib/libspeech_enh_lib.so
 
 # Display
