@@ -230,13 +230,6 @@ service sensorcal /system/bin/sensorcal.sh
     disabled
     oneshot
 
-service volkey_switch /system/bin/tinymix VOLKEY_SWITCH VOLKEY_SWAP
-    class main
-    user root
-    group root
-    disabled
-    oneshot
-
 on property:vold.decrypt=trigger_restart_min_framework
     start kisd
 
@@ -246,6 +239,3 @@ on property:vold.decrypt=trigger_restart_framework
 
 on property:runtime.kisdIsReady=1
     start force_prov
-
-on property:ro.product.device=thempis
-    start volkey_switch
