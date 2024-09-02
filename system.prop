@@ -14,5 +14,8 @@ ro.radio.noril=yes
 # TEE
 mtk_in_house_tee_support=true
 
+# SurfaceFlinger
+debug.sf.latch_unsignaled=1
+
 # USB
 ro.usb.vid=1949
