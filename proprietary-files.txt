@@ -8,6 +8,9 @@ lib/libblisrc.so
 lib/libmtk_drvb.so
 lib/libspeech_enh_lib.so
 
+# Camera - from LineageOS 7.1.2 NJH47F with Ie9888737b2e52c189a864d87ab2f50e1715dce63
+lib/libcameraservice.so|c30388b45471c4f7e74aee04b1745ff222f16808
+
 # Display
 lib/libbwc.so
 lib/libdpframework.so
