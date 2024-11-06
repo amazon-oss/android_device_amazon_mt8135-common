@@ -262,9 +262,6 @@ function blob_fixup() {
         vendor/lib/mediadrm/libplayreadydrmplugin.so)
             patchelf --add-needed "libamazonlog.so" "${2}"
             ;;
-        vendor/lib/mediadrm/libwvdrmengine.so)
-            patchelf --add-needed "libamazonlog.so" "${2}"
-            ;;
     esac
 }
 
