@@ -239,3 +239,15 @@ on property:vold.decrypt=trigger_restart_framework
 
 on property:runtime.kisdIsReady=1
     start force_prov
+
+service set_hpl_volume /system/bin/tinymix "Amp HPL Volume" 60
+    class main
+    user root
+    group root
+    oneshot
+
+service set_hpr_volume /system/bin/tinymix "Amp HPR Volume" 60
+    class main
+    user root
+    group root
+    oneshot
