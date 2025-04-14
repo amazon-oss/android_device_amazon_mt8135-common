@@ -1,3 +1,20 @@
+on init
+    # Camera daemon cpuset
+    mkdir /dev/cpuset/camera-daemon
+    write /dev/cpuset/camera-daemon/cpus 0
+    write /dev/cpuset/camera-daemon/mems 0
+    chown system system /dev/cpuset/camera-daemon
+    chown system system /dev/cpuset/camera-daemon/tasks
+    chmod 0664 /dev/cpuset/camera-daemon/tasks
+
+    # Tune cpusets parameters
+    write /dev/cpuset/foreground/cpus 0-3
+    write /dev/cpuset/foreground/boost/cpus 0-3
+    write /dev/cpuset/background/cpus 0
+    write /dev/cpuset/system-background/cpus 0-1
+    write /dev/cpuset/top-app/cpus 0-3
+    write /dev/cpuset/camera-daemon/cpus 2-3
+
 on post-fs
     # Read one page at a time for swap (default is 8)
     write /proc/sys/vm/page-cluster 0
