@@ -1,8 +1,3 @@
-on init
-    # Dynamic CPU boost
-    chown system system /sys/devices/platform/dynamic_boost/dynamic_boost
-    chmod 0750 /sys/devices/platform/dynamic_boost/dynamic_boost
-
 on post-fs
     # Read one page at a time for swap (default is 8)
     write /proc/sys/vm/page-cluster 0
