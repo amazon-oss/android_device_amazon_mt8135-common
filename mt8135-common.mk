@@ -24,6 +24,9 @@ PRODUCT_PACKAGES += \
 PRODUCT_COPY_FILES += \
     $(call find-copy-subdir-files,*,$(LOCAL_PATH)/configs/audio/,$(TARGET_COPY_OUT_VENDOR)/etc)
 
+# Boot animation
+TARGET_BOOTANIMATION_HALF_RES := true
+
 # Characteristics
 PRODUCT_CHARACTERISTICS := tablet
 
