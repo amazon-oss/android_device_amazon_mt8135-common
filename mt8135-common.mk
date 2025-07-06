@@ -88,12 +88,6 @@ PRODUCT_PACKAGES += \
     init.power.rc \
     ueventd.mt8135.rc
 
-ifneq ($(filter eng userdebug,$(TARGET_BUILD_VARIANT)),)
-ADDITIONAL_DEFAULT_PROPERTIES += \
-    ro.adb.secure=0 \
-    ro.secure=0
-endif
-
 # Shims
 PRODUCT_PACKAGES += \
     libamazonlog \
