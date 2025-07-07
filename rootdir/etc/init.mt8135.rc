@@ -262,6 +262,6 @@ service set_hpr_volume /system/bin/tinymix "Amp HPR Volume" 60
     group root
     oneshot
 
-service battery_charger /sbin/healthd -c
+service battery_charger /charger
     class charger
     critical
