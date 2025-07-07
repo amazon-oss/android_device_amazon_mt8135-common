@@ -161,7 +161,8 @@ PRODUCT_PACKAGES += \
 PRODUCT_PACKAGES += \
     hostapd \
     hostapd_cli \
-    wpa_cli
+    wpa_cli \
+    wpa_supplicant
 
 PRODUCT_PACKAGES += \
     android.hardware.wifi@1.0-service
