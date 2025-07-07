@@ -21,8 +21,19 @@ PRODUCT_PACKAGES += \
     libtinyalsa \
     tinymix
 
+PRODUCT_PACKAGES += \
+    android.hardware.audio@2.0-impl \
+    android.hardware.audio.effect@2.0-impl \
+    android.hardware.broadcastradio@1.0-impl \
+    android.hardware.soundtrigger@2.0-impl
+
 PRODUCT_COPY_FILES += \
     $(call find-copy-subdir-files,*,$(LOCAL_PATH)/configs/audio/,$(TARGET_COPY_OUT_VENDOR)/etc)
+
+# Bluetooth
+PRODUCT_PACKAGES += \
+    android.hardware.bluetooth@1.0-impl \
+    android.hardware.bluetooth@1.0-service \
 
 # Boot animation
 TARGET_BOOTANIMATION_HALF_RES := true
@@ -34,12 +45,42 @@ PRODUCT_CHARACTERISTICS := tablet
 PRODUCT_PACKAGES += \
     libion
 
+PRODUCT_PACKAGES += \
+    android.hardware.graphics.allocator@2.0-impl \
+    android.hardware.graphics.allocator@2.0-service \
+    android.hardware.graphics.mapper@2.0-impl \
+
+PRODUCT_PACKAGES += \
+    android.hardware.memtrack@1.0-impl \
+    android.hardware.memtrack@1.0-service
+
+PRODUCT_PACKAGES += \
+    android.hardware.renderscript@1.0-impl
+
 # DRM
 PRODUCT_PACKAGES += \
     libstlport_shared
 
+PRODUCT_PACKAGES += \
+    android.hardware.drm@1.0-impl \
+    android.hardware.drm@1.0-service
+
+# Gatekeeper
+PRODUCT_PACKAGES += \
+    android.hardware.gatekeeper@1.0-impl
+
 # GPS
 $(call inherit-product, device/common/gps/gps_us_supl.mk)
+
+# Health
+PRODUCT_PACKAGES += \
+    android.hardware.health@1.0-impl \
+    android.hardware.health@1.0-service
+
+# Keymaster
+PRODUCT_PACKAGES += \
+    android.hardware.keymaster@3.0-impl \
+    android.hardware.keymaster@3.0-service
 
 # Lights
 PRODUCT_PACKAGES += \
@@ -82,6 +123,9 @@ PRODUCT_COPY_FILES += \
 PRODUCT_PACKAGES += \
     power.mt8135
 
+PRODUCT_PACKAGES += \
+    android.hardware.power@1.0-impl
+
 # Rootdir
 PRODUCT_PACKAGES += \
     fstab.mt8135 \
@@ -91,6 +135,10 @@ PRODUCT_PACKAGES += \
     init.power.rc \
     ueventd.mt8135.rc
 
+# Sensors
+PRODUCT_PACKAGES += \
+    android.hardware.sensors@1.0-impl
+
 # Shims
 PRODUCT_PACKAGES += \
     libamazonlog \
@@ -99,6 +147,10 @@ PRODUCT_PACKAGES += \
 PRODUCT_PACKAGES += \
     libstagefright_shim \
     libui_shim
+
+# USB
+PRODUCT_PACKAGES += \
+    android.hardware.usb@1.0-service
 
 # Wi-Fi
 PRODUCT_PACKAGES += \
@@ -110,6 +162,9 @@ PRODUCT_PACKAGES += \
     hostapd \
     hostapd_cli \
     wpa_cli
+
+PRODUCT_PACKAGES += \
+    android.hardware.wifi@1.0-service
 
 PRODUCT_COPY_FILES += \
     $(call find-copy-subdir-files,*,$(LOCAL_PATH)/configs/wifi,$(TARGET_COPY_OUT_SYSTEM)/etc/wifi)
