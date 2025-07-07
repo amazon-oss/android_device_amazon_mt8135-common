@@ -137,6 +137,12 @@ PRODUCT_PACKAGES += \
 
 # Sensors
 PRODUCT_PACKAGES += \
+    sensors.mt8135
+
+PRODUCT_COPY_FILES += \
+    $(call find-copy-subdir-files,*,$(LOCAL_PATH)/configs/sensors/,$(TARGET_COPY_OUT_VENDOR)/etc/sensors)
+
+PRODUCT_PACKAGES += \
     android.hardware.sensors@1.0-impl
 
 # Shims
